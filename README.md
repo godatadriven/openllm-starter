@@ -68,7 +68,7 @@ ssh {author}-instance.{zone}.{project}
 ## 4. Clone this repo on your VM
 
 ```bash
-git clone ...
+git clone https://github.com/godatadriven/openllm-starter.git
 ```
 
 ## 5. Setup the environment
