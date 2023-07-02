@@ -13,7 +13,7 @@ It contains:
 - [Terraform](https://www.terraform.io/downloads.html)
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install)
 
-## Setup and clean up
+## Setup
 
 ### 1. Configure GCP CLI
 
@@ -65,16 +65,16 @@ ssh {author}-instance.{zone}.{project}
    2. Select "Remote-SSH: Connect to Host..."
    3. Select your compute instance `{author}-instance.{zone}.{project}`
 
-## 4. Clone this repo on your VM
+### 4. Clone this repo on your VM
 
 ```bash
 git clone https://github.com/godatadriven/openllm-starter.git
 ```
 
-## 5. Setup the environment
+### 5. Setup the environment
 
 1. Create a virtual environment of your choice: 
-   1. A new conda environment: `conda create --name {env_name} --clone base`
+   1. A new conda environment: `conda create --name {env_name} python=3.10`
    2. A python venv: `python -m venv .venv`
 
 2. And activate it:
@@ -87,6 +87,8 @@ git clone https://github.com/godatadriven/openllm-starter.git
 pip install -r requirements.txt
 ```
 
+> **Note:** There are probably more elegant ways to manage the dependencies, but I've struggled to get it to work smoothly with conda/poetry and GPUs. So for now, this is the easiest way I've found.
+
 4. Install some extensions (if you're using VSCode)
 
 ```bash
@@ -95,15 +97,38 @@ code --install-extension ms-toolsai.jupyter
 code --install-extension github.copilot  # optional
 ```
 
-> **Note:** There are probably more elegant ways to manage the dependencies, but I've struggled to get it to work smoothly on GPUs. So for now, this is the easiest way I've found.
+### 6. Port forwarding
 
-## 6. Run the kickstarter notebook
+To make sure we can inspect streamlit apps in a browser on our local machine, we need to forward the ports from the VM to our local machine. To do so, run the following on your local machine:
+
+```bash
+gcloud compute ssh {author}-instance --project {project} --zone {zone} -- -L 8501:localhost:8501
+```
+
+You can find the author, project, and zone in `terraform.tfvars` or `variables.tf`
+
+## Run some code 🚀
+
+### 1. Run the kickstarter notebook
 
 1. Open `llms.ipynb`
 2. Select the `{env_name}` kernel
 3. Have fun!
 
-## 7. Cleaning up
+### 2. Run the chat interface app
+
+1. Make sure you've forwarded the ports (see above)
+
+2. Run the app on the instance:
+
+```bash
+streamlit run app.py
+```
+
+3. Open the app in your browser: http://localhost:8501 
+4. Change the `load_model` and `predict` functions (and more) and have fun!
+
+## Clean up
 
 1. The instance is configured to stop after 1 hour of inactivity. But you can also stop it manually here: <br>https://console.cloud.google.com/compute/instances?project={project}
 
