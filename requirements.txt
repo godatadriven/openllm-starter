@@ -2,3 +2,4 @@ streamlit==1.24.0
 torch==2.0.1
 langchain==0.0.220
 transformers==4.30.2
+ipykernel==6.23.3
