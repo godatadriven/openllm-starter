@@ -38,13 +38,13 @@ gcloud config set project {project}
 2. Within the `terraform.tfvars` file, set the following variables:
    - `author`: Your name
    - `project`: Your GCP project ID, i.e. `{project}` from above
-   - Optionally set other variables (see `variables.tf`)
+   - Optionally set other variables (see `variables.tf`) in the `terraform.tfvars` file
 3. Initialize terraform: `terraform init`
 4. Check the plan with: `terraform plan`
 5. Spin up the infra: `terraform apply`
 6. A GPU instance should now be ready for you. You should be able to see it here: <br>https://console.cloud.google.com/compute/instances?project={project}
 
-> **Note:** The instance we provision is a `n1-standard-8` with a `NVIDIA Tesla V100` GPU. This costs about €2.30 per hour. It's configured to stop after 1 hour of idle time, but please be mindful of the costs, and still shut it down manually if you're not using it. You can change the compute type in `variables.tf`, and find more [pricing info here](https://cloud.google.com/compute/vm-instance-pricing).
+> **Note:** The instance we provision is a `n1-standard-8` with a `NVIDIA Tesla V100` GPU. This costs about €2.30 per hour. It's configured to stop after 1 hour of idle time, but please be mindful of the costs, and still shut it down manually if you're not using it. You can change the compute type in `terraform.tfvars`, and find more [pricing info here](https://cloud.google.com/compute/vm-instance-pricing).
 
 ### 3. Connecting to the instance
 
@@ -72,6 +72,7 @@ ssh {author}-instance.{zone}.{project}
 ```bash
 git clone https://github.com/godatadriven/openllm-starter.git
 ```
+And open the project folder: `cd openllm-starter`
 
 ### 5. Setup the environment
 
@@ -80,19 +81,23 @@ git clone https://github.com/godatadriven/openllm-starter.git
 3. Install the requirements
 
 ```bash
-cd openllm-starter
 pip install -r requirements.txt
 ```
 
 > **Note:** There are probably more elegant ways to manage the dependencies, but I've struggled to get it to work smoothly with conda/poetry and GPUs. So for now, this is the easiest way I've found.
 
-4. (a) \[Jupyter\] Install the kernel in jupyter `python -m ipykernel install --user`, `pip install notebook`
-4. (b) \[VSCode\] Install some extensions
+4. Install some dependencies depending on which editor you use:
 
+a. VSCode
 ```bash
 code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter
 code --install-extension github.copilot  # optional
+```
+b. Jupyter
+```bash
+pip install notebook
+python -m ipykernel install --user  # install the kernel in jupyter
 ```
 
 ### 6. Port forwarding
@@ -109,7 +114,7 @@ You can find the author, project, and zone in `terraform.tfvars` or `variables.t
 
 ### 1. Run the kickstarter notebook
 
-0. \[Jupyter\] Launch jupyter with `jupyter notebook`
+0. (If you're working with Jupyter) Launch Jupyter with `jupyter notebook`
 1. Open `llms.ipynb`
 2. Select the `{env_name}` kernel
 3. Have fun!
