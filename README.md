@@ -48,11 +48,13 @@ gcloud config set project {project}
 
 ### 3. Connecting to the instance
 
-1. Configure ssh for the compute instance (if it doesn't work, try again)
+1. Configure ssh for the compute instance.
 
 ```bash
 gcloud compute config-ssh
 ```
+
+> **Note:** It will take a few minutes before the instance is ready to accept ssh connections. Wait a few minutes, and try again if the next step doesn't work.
 
 2. Connect with the instance as prompted
 
@@ -99,7 +101,7 @@ code --install-extension github.copilot  # optional
 
 ### 6. Port forwarding
 
-To make sure we can inspect streamlit apps in a browser on our local machine, we need to forward the ports from the VM to our local machine. To do so, run the following on your local machine:
+To make sure we can inspect streamlit apps in a browser on our local machine, we need to forward the ports from the VM to our local machine. To do so, run the following **on your local machine**:
 
 ```bash
 gcloud compute ssh {author}-instance --project {project} --zone {zone} -- -L 8501:localhost:8501
