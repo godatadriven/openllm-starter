@@ -86,6 +86,7 @@ git clone https://github.com/godatadriven/openllm-starter.git
 3. Install the requirements
 
 ```bash
+cd openllm-starter
 pip install -r requirements.txt
 ```
 
