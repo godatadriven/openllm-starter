@@ -75,14 +75,8 @@ git clone https://github.com/godatadriven/openllm-starter.git
 
 ### 5. Setup the environment
 
-1. Create a virtual environment of your choice: 
-   1. A new conda environment: `conda create --name {env_name} python=3.10`
-   2. A python venv: `python -m venv .venv`
-
-2. And activate it:
-   1. Conda: `conda activate {env_name}`
-   2. Venv: `source .venv/bin/activate`
-
+1. Create a new conda environment `conda create --name {env_name} python=3.10`
+2. And activate it `conda activate {env_name}`
 3. Install the requirements
 
 ```bash
@@ -92,7 +86,8 @@ pip install -r requirements.txt
 
 > **Note:** There are probably more elegant ways to manage the dependencies, but I've struggled to get it to work smoothly with conda/poetry and GPUs. So for now, this is the easiest way I've found.
 
-4. Install some extensions (if you're using VSCode)
+4. (a) \[Jupyter\] Install the kernel in jupyter `python -m ipykernel install --user`, `pip install notebook`
+4. (b) \[VSCode\] Install some extensions
 
 ```bash
 code --install-extension ms-python.python
@@ -105,7 +100,7 @@ code --install-extension github.copilot  # optional
 To make sure we can inspect streamlit apps in a browser on our local machine, we need to forward the ports from the VM to our local machine. To do so, run the following **on your local machine**:
 
 ```bash
-gcloud compute ssh {author}-instance --project {project} --zone {zone} -- -L 8501:localhost:8501
+gcloud compute ssh {author}-instance --project {project} --zone {zone} -- -L 8501:localhost:8501 -L 8888:localhost:8888
 ```
 
 You can find the author, project, and zone in `terraform.tfvars` or `variables.tf`
@@ -114,6 +109,7 @@ You can find the author, project, and zone in `terraform.tfvars` or `variables.t
 
 ### 1. Run the kickstarter notebook
 
+0. \[Jupyter\] Launch jupyter with `jupyter notebook`
 1. Open `llms.ipynb`
 2. Select the `{env_name}` kernel
 3. Have fun!
