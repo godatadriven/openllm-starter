@@ -7,6 +7,11 @@ It contains:
 - Infra to provision a GPU instance on GCP, as many LLMs are too big to run on a CPU
 - Instructions to install basic requirements
 - Kickstarter notebook for loading and running open source LLMs
+- Streamlit app to allow you to chat with your LLM!
+
+
+<img width="500" alt="image" src="https://github.com/godatadriven/openllm-starter/assets/48921025/165901a8-870b-462a-8014-163104b69120">
+
 
 ## Prerequisites
 
