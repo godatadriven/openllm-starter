@@ -164,5 +164,5 @@ Provided you have the required quota for provisioning a g5.12xlarge machine (whi
 
 Some useful things to keep in mind:
 - deployment takes about 15-30 minutes
-- inference takes about 35 seconds, which is not yes ideal
+- inference takes about 35 seconds, which is not yet ideal
 - the g5.12xlarge costs about €5.60 per hour, so make sure to clean up afterwards
