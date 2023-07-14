@@ -144,7 +144,25 @@ streamlit run app.py
 2. When you fully want to clean up, run (on your local machine):
 
 ```bash
+
+
 terraform destroy
 ```
 
 > **Note:** When deleting the instance with `terraform destroy`, your data will be lost. So make sure to save your work before doing so.
+
+
+## Extra: Going really big with Falcon 40b
+
+While it becomes increasingly feasible to run your own small (~1 billion param) small models as described above, there are also more and more tutorials becoming available to run and deploy the biggest models of them all.
+
+One example of such a model is the [falcon-40b](https://huggingface.co/tiiuae/falcon-40b), which is among the top 10 performing models in the [open LLM leaderboard]([url](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) at the time of writing. 
+
+To deploy this model in your own (AWS) infrastructure, we recommend to follow the following tutorial: [falcon-40b-accelerate.ipynb](https://github.com/aws/amazon-sagemaker-examples/blob/main/inference/generativeai/llm-workshop/lab10-falcon-40b-and-7b/falcon-40b-accelerate.ipynb)
+
+Provided you have the required quota for provisioning a g5.12xlarge machine (which you can request otherwise), you can deploy this model within 30 minutes by just running the notebook in a Sagemaker instance.
+
+Some useful things to keep in mind:
+- deployment takes about 15-30 minutes
+- inference takes about 35 seconds, which is not yes ideal
+- the g5.12xlarge costs about €5.60 per hour, so make sure to clean up afterwards
